@@ -1,1 +1,25 @@
 @import "tailwindcss";
+
+
+body {
+    /* Image path */
+    background-image: url('assets/bg.png');
+
+    /* Cover full screen */
+    background-size: cover;
+
+    /* Center the image */
+    background-position: center;
+
+    /* Image does not repeat */
+    background-repeat: no-repeat;
+
+    /* Make it fixed while scrolling */
+    background-attachment: fixed;
+
+    /* Optional: smooth fallback color */
+    background-color: #000; 
+    
+
+    color: #fff;
+}
