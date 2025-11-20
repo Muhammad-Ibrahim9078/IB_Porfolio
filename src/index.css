@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 
-body {
+#top {
     /* Image path */
-    background-image: url('assets/bg.png');
+    background-image: url('assets/web-dev.png');
 
     /* Cover full screen */
     background-size: cover;
@@ -21,5 +21,17 @@ body {
     background-color: #000; 
     
 
-    color: #fff;
+    color: #fff; 
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+
+
+#myName{
+    background-color: rgba(255, 255, 255, 0.75);
 }
