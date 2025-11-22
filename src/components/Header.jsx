@@ -1,19 +1,20 @@
 import React, { useState } from "react";
 import { HiMenu, HiX } from "react-icons/hi";
+import Resume from "./Resume";
 
 function Header() {
   const [open, setOpen] = useState(false);
 
   return (
     <>
-      <header className="fixed top-0 left-0 w-full shadow-md z-50">
+      <header className="fixed top-0 left-0 w-full shadow-md z-50" id="header" >
         <div className="flex justify-between items-center p-5 max-w-7xl mx-auto">
           <h1 className="text-2xl font-bold">Ib_Portfolio</h1>
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex gap-10 text-lg">
-            <a href="#home" className="relative group">
-              Home
+            <a href="#intro" className="relative group">
+              Intro
               <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
             </a>
 
@@ -31,6 +32,9 @@ function Header() {
               Contact
               <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
             </a>
+
+             <div className="w-[180px] text-center"><Resume /></div>
+
           </nav>
 
           {/* Mobile Menu Button */}
@@ -44,15 +48,46 @@ function Header() {
 
         {/* Mobile Dropdown Menu FULL WIDTH */}
           <nav
-            className={`md:hidden flex flex-col rounded items-center bg-gray-600 gap-10 text-lg shadow-md overflow-hidden transition-all duration-300 ${
-              open ? "max-h-[600px] py-6 w-[90px]" : "max-h-0 py-0 w-full"
-            }`}
-          >
-            <a href="#intro" onClick={() => setOpen(false)} className="bg-white hover:bg-green-200 text-black rounded p-1">Intro</a>
-            <a href="#about" onClick={() => setOpen(false)} className="bg-white hover:bg-green-200 text-black rounded p-1">About</a>
-            <a href="#projects" onClick={() => setOpen(false)} className="bg-white hover:bg-green-200 text-black rounded p-1">Projects</a>
-            <a href="#contact" onClick={() => setOpen(false)} className="bg-white hover:bg-green-200 text-black rounded p-1">Contact</a>
-          </nav>
+  className={`md:hidden fixed top-0 right-0 mt-[60px] h-full rounded-xl bg-gray-700 text-white flex flex-col items-center gap-11 pt-24 pb-10 shadow-xl transition-all duration-300 ${
+    open ? "w-60 opacity-100" : "w-0 opacity-0"
+  }`}
+  style={{ overflowX: "hidden" }}
+>
+  <a
+    href="#intro"
+    onClick={() => setOpen(false)}
+    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+  >
+    Intro
+  </a>
+
+  <a
+    href="#about"
+    onClick={() => setOpen(false)}
+    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+  >
+    About
+  </a>
+
+  <a
+    href="#projects"
+    onClick={() => setOpen(false)}
+    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+  >
+    Projects
+  </a>
+
+  <a
+    href="#contact"
+    onClick={() => setOpen(false)}
+    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+  >
+    Contact
+  </a>
+
+  <div className="w-[180px] text-center"><Resume /></div>
+</nav>
+
       </header>
 
       {/* Push content below header */}
@@ -62,3 +97,4 @@ function Header() {
 }
 
 export default Header;
+
