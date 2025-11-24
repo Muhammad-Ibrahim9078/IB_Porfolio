@@ -5,7 +5,7 @@ function DaysICode() {
         <>
             <div className='bg-yellow-300 p-[5px] lg:p-[30px] text-center ' data-aos="flip-right">
 
-                <h1 className='text-4xl font-bold text-blue-500'>Days I Code</h1>
+                <h1 className='text-4xl font-bold text-blue-500'>Active Days in Github</h1>
                 
                 <div className='flex justify-center mt-[50px]'>
 
