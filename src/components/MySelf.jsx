@@ -1,4 +1,3 @@
-import React from "react";
 // import profileImg from "../assets/me.png";
 
 const MySelf = () => {
@@ -25,7 +24,7 @@ const MySelf = () => {
 
           <p className="mt-4 text-lg leading-relaxed">
             I am passionate about building modern web applications and love to turn
-            ideas into reality using code. My journey in tech has equipped me with 
+            ideas into reality using code. My journey in tech has equipped me with
             a strong foundation in both frontend and backend technologies.
           </p>
 
@@ -43,7 +42,7 @@ const MySelf = () => {
           </ul>
 
           <p className="mt-6 text-lg">
-            I am always eager to learn new technologies and take on challenging projects 
+            I am always eager to learn new technologies and take on challenging projects
             that help me grow as a developer.
           </p>
         </div>

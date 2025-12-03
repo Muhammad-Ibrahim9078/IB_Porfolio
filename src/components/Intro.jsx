@@ -60,7 +60,7 @@ function Intro() {
           {/* Right Image */}
           <div className="home-image mt-[130px] md:mt-0" data-aos="fade-down-left">
             {/* <img src={devImg} alt="Developer" className="w-72" /> */}
-            <img src="../assets/me.png" alt="" className="rounded-full shadow-lg border-5 border-blue-500" />
+            <img src="https://avatars.githubusercontent.com/u/187507900?v=4" alt="" className="rounded-full shadow-lg border-5 border-blue-500" />
           </div>
         </div>
 

@@ -4,7 +4,7 @@ function Resume() {
   return (
 
       <a
-        href="../public/Resume.pdf"
+        href="https://res.cloudinary.com/df92wfbox/image/upload/v1764776157/myImages/p3up5ikinlk1gdciffbb.jpg"
         target="_blank"
         rel="noopener noreferrer"
         className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-semibold shadow-lg transition-all duration-300  w-[200px]"
