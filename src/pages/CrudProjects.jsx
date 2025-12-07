@@ -13,7 +13,7 @@ import {
 import { db } from "../config/firebase";
 
 const CLOUDINARY_UPLOAD_PRESET = "ib_cloudinary";
-const CLOUDINARY_CLOUD_NAME = "YOUR_CLOUD_NAME";
+const CLOUDINARY_CLOUD_NAME = "df92wfbox";
 
 export default function CrudProjects() {
   const [form, setForm] = useState({
@@ -215,126 +215,5 @@ export default function CrudProjects() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useEffect, useState } from "react";
-// import { db } from "../config/firebase";
-// import {
-//   collection,
-//   addDoc,
-//   serverTimestamp,
-// } from "firebase/firestore";
-
-// function CrudProjectsNoImage() {
-
-
-//   const [form, setForm] = useState({
-//     title: "",
-//     description: "",
-//     githubLink: "",
-//     liveLink: "",
-//   });
-
-//   const [data, setData] = useState();
-
-
-//   // ADD
-//   async function addProject() {
-//     await addDoc(collection(db, "projects"), {
-//       ...form,
-//       created_at: serverTimestamp(),
-//     });
-
-//     setForm({ title: "", description: "", githubLink: "", liveLink: "" });
-//   }
-
-
-//   return (
-//     <div className="p-8 max-w-4xl mx-auto text-white">
-
-//       <h1 className="text-3xl font-bold mb-6">Projects CRUD (No Image)</h1>
-
-//       <div className="bg-gray-800 p-6 rounded grid gap-4">
-
-//         <input
-//           className="p-2 rounded bg-gray-700"
-//           placeholder="Title"
-//           value={form.title}
-//           onChange={(e) => setForm({ ...form, title: e.target.value })}
-//         />
-
-//         <textarea
-//           className="p-2 rounded bg-gray-700"
-//           placeholder="Description"
-//           value={form.description}
-//           onChange={(e) => setForm({ ...form, description: e.target.value })}
-//         />
-
-//         <input
-//           className="p-2 rounded bg-gray-700"
-//           placeholder="GitHub Link"
-//           value={form.githubLink}
-//           onChange={(e) => setForm({ ...form, githubLink: e.target.value })}
-//         />
-
-//         <input
-//           className="p-2 rounded bg-gray-700"
-//           placeholder="Live Link"
-//           value={form.liveLink}
-//           onChange={(e) => setForm({ ...form, liveLink: e.target.value })}
-//         />
-
-//           <button onClick={addProject} className="bg-green-600 p-2 rounded">
-//             Add
-//           </button>
-//        </div>
-//        </div>
-
-//   )
-// }
-
-// export default CrudProjectsNoImage;
 
 

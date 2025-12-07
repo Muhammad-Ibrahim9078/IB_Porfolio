@@ -55,7 +55,7 @@ const MySelf = () => {
           data-aos-delay="300"
         >
           <img
-            src='../assets/code.gif'
+            src='https://i.pinimg.com/originals/b2/32/55/b2325557a903fdf56b50da4656da9221.gif'
             alt="Profile"
             className="w-64 h-64 md:w-80 md:h-80 rounded-full shadow-lg border-4 border-purple-500"
           />
