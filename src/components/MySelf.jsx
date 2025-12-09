@@ -1,5 +1,7 @@
 // import profileImg from "../assets/me.png";
 
+import Resume from "./Resume";
+
 const MySelf = () => {
   return (
     <div className="bg-[#0c001a] text-white min-h-screen flex items-center" id="about">
@@ -27,6 +29,12 @@ const MySelf = () => {
             ideas into reality using code. My journey in tech has equipped me with
             a strong foundation in both frontend and backend technologies.
           </p>
+          
+          {/* Resume show */}
+          <div className="w-[180px] text-center"
+          data-aos="fade-up">
+            <br />
+            <Resume /></div>
 
           <h2 className="mt-6 text-xl font-semibold">My professional skillset includes:</h2>
 

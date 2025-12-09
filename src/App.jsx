@@ -8,6 +8,7 @@ import DaysICode from './components/DaysICode'
 import IProvideServices from './components/IProvideServices'
 import Footer from './components/Footer'
 import CrudProjects from './pages/CrudProjects'
+import ProjectsShow from './pages/ProjectShow'
 
 function App() {
   return (
@@ -35,7 +36,9 @@ function App() {
       <IProvideServices />
       
 
-      <CrudProjects />
+
+
+      <ProjectsShow />
 
       <Footer />
     

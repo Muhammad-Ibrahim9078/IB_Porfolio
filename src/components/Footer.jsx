@@ -5,6 +5,7 @@ import {
   FaLinkedinIn,
   FaInstagram,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -66,7 +67,9 @@ function Footer() {
             <li><a href="#home" className="hover:text-white">Home</a></li>
             <li><a href="#about" className="hover:text-white">About</a></li>
             <li><a href="#projects" className="hover:text-white">Projects</a></li>
-            <li><a href="#contact" className="hover:text-white">Contact</a></li>
+            <li><a href="#contact" 
+            className="hover:text-white">Contact</a></li>
+            <Link to={'crud'}>Admin Dashboard</Link>
           </ul>
         </div>
 
@@ -80,6 +83,7 @@ function Footer() {
             <li className="hover:text-white">App Development</li>
             <li className="hover:text-white">UI/UX Designing</li>
             <li className="hover:text-white">Backend Solutions</li>
+            
           </ul>
         </div>
 

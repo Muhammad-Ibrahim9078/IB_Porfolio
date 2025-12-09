@@ -20,6 +20,7 @@ export default function ProjectsShow() {
 
   // ---------- OPEN CARD DETAILS IN POPUP ----------
   function openDetails(p) {
+    
     Swal.fire({
       title: p.title,
       html: `
@@ -46,7 +47,11 @@ export default function ProjectsShow() {
   }
 
   return (
-    <div className="p-8 max-w-6xl mx-auto text-white">
+    <div className="p-8 max-w-6xl mx-auto text-white"
+    
+    data-aos="zoom-in"
+              data-aos-delay
+              >
       <h1 className="text-3xl font-bold mb-6">My Projects</h1>
 
       {/* PROJECTS GRID */}

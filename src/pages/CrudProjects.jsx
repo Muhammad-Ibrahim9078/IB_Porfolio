@@ -25,8 +25,8 @@ export default function CrudProjects() {
   });
 
   const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  // ----------------- FETCH ------------------
   async function fetchProjects() {
     let snapshot = await getDocs(collection(db, "projects"));
     let arr = [];
@@ -38,7 +38,6 @@ export default function CrudProjects() {
     fetchProjects();
   }, []);
 
-  // ------------------ IMAGE UPLOAD ------------------
   async function uploadImage(file) {
     const formData = new FormData();
     formData.append("file", file);
@@ -51,9 +50,9 @@ export default function CrudProjects() {
     return res.data.secure_url;
   }
 
-  // ------------------- ADD ------------------
   async function addProject() {
     try {
+      setLoading(true);
       let imgUrl = "";
       if (form.image) imgUrl = await uploadImage(form.image);
 
@@ -76,10 +75,11 @@ export default function CrudProjects() {
       fetchProjects();
     } catch (err) {
       Swal.fire("Error", err.message, "error");
+    } finally {
+      setLoading(false);
     }
   }
 
-  // ------------------- DELETE ------------------
   async function deleteProject(id) {
     Swal.fire({
       title: "Are you sure?",
@@ -96,7 +96,6 @@ export default function CrudProjects() {
     });
   }
 
-  // ------------------- EDIT ------------------
   function editProject(p) {
     Swal.fire({
       title: "Edit Project",
@@ -127,36 +126,38 @@ export default function CrudProjects() {
   }
 
   return (
-    <div className="p-8 max-w-5xl mx-auto text-white">
+    <div className="p-4 sm:p-6 md:p-8 w-full max-w-4xl mx-auto text-white">
 
-      <h1 className="text-3xl font-bold mb-6">Projects CRUD with Cloudinary</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center sm:text-left">
+        Projects CRUD with Cloudinary & Firebase
+      </h1>
 
-      {/* ADD FORM */}
-      <div className="bg-gray-800 p-6 rounded grid gap-4">
+      {/* --- ADD FORM --- */}
+      <div className="bg-gray-800 p-4 sm:p-6 rounded-xl grid gap-4">
 
         <input
-          className="p-2 rounded bg-gray-700"
+          className="p-3 rounded bg-gray-700 text-sm sm:text-base"
           placeholder="Title"
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
         />
 
         <textarea
-          className="p-2 rounded bg-gray-700"
+          className="p-3 rounded bg-gray-700 h-24 sm:h-28 text-sm sm:text-base"
           placeholder="Description"
           value={form.description}
           onChange={(e) => setForm({ ...form, description: e.target.value })}
         />
 
         <input
-          className="p-2 rounded bg-gray-700"
+          className="p-3 rounded bg-gray-700 text-sm sm:text-base"
           placeholder="GitHub Link"
           value={form.githubLink}
           onChange={(e) => setForm({ ...form, githubLink: e.target.value })}
         />
 
         <input
-          className="p-2 rounded bg-gray-700"
+          className="p-3 rounded bg-gray-700 text-sm sm:text-base"
           placeholder="Live Link"
           value={form.liveLink}
           onChange={(e) => setForm({ ...form, liveLink: e.target.value })}
@@ -164,56 +165,63 @@ export default function CrudProjects() {
 
         <input
           type="file"
-          className="p-2 rounded bg-gray-700"
+          className="p-2 rounded bg-gray-700 text-sm sm:text-base"
           onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
         />
 
         <button
           onClick={addProject}
-          className="bg-green-600 p-2 rounded">
-          Add Project
+          disabled={loading}
+          className={`p-3 rounded text-sm sm:text-base font-semibold transition-all 
+            ${loading
+              ? "bg-gray-600 cursor-not-allowed"
+              : "bg-green-600 hover:bg-green-700 hover:scale-[1.02]"
+            }`}
+        >
+          {loading ? "Saving..." : "Add Project"}
         </button>
       </div>
 
-      {/* PROJECT LIST */}
-      <div className="grid md:grid-cols-2 gap-6 mt-10">
-        {data.map((p) => (
-          <div key={p.id} className="bg-gray-900 p-4 rounded shadow">
+      {/* --- PROJECT CARDS --- */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
 
+        {data.map((p) => (
+          <div
+            key={p.id}
+            className="bg-gray-900 p-4 rounded-xl shadow-md hover:shadow-lg transition"
+          >
             {p.image && (
               <img
                 src={p.image}
-                className="h-40 w-full object-cover rounded mb-3"
+                className="h-40 sm:h-48 w-full object-cover rounded mb-3"
                 alt=""
               />
             )}
 
-            <h2 className="text-xl font-bold">{p.title}</h2>
-            <p className="text-gray-300">{p.description}</p>
+            <h2 className="text-lg sm:text-xl font-bold">{p.title}</h2>
+            <p className="text-gray-300 text-sm sm:text-base">{p.description}</p>
 
-            <div className="mt-4 flex justify-between">
+            <div className="mt-4 flex flex-col sm:flex-row gap-2 sm:gap-4">
+
               <button
                 onClick={() => editProject(p)}
-                className="bg-yellow-600 px-4 py-1 rounded">
+                className="bg-yellow-600 px-4 py-2 rounded hover:bg-yellow-700 transition"
+              >
                 Edit
               </button>
 
               <button
                 onClick={() => deleteProject(p.id)}
-                className="bg-red-600 px-4 py-1 rounded">
+                className="bg-red-600 px-4 py-2 rounded hover:bg-red-700 transition"
+              >
                 Delete
               </button>
-            </div>
 
+            </div>
           </div>
         ))}
-      </div>
 
+      </div>
     </div>
   );
 }
-
-
-
-
-
