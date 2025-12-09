@@ -9,6 +9,7 @@ import IProvideServices from './components/IProvideServices'
 import Footer from './components/Footer'
 import CrudProjects from './pages/CrudProjects'
 import ProjectsShow from './pages/ProjectShow'
+import Contact from './components/Contact'
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
 
 
       <ProjectsShow />
+
+
+      <Contact />
 
       <Footer />
     

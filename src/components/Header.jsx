@@ -13,13 +13,18 @@ function Header() {
 
           {/* Desktop Menu */}
           <nav className="hidden md:flex gap-10 text-lg">
-            <a href="#intro" className="relative group">
-              Intro
-              <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
-            </a>
 
             <a href="#about" className="relative group">
               About
+              <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+
+            <a href="#tech" className="relative group">
+              Tech I Used
+              <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#services" className="relative group">
+              Services
               <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
             </a>
 
@@ -53,13 +58,6 @@ function Header() {
   }`}
   style={{ overflowX: "hidden" }}
 >
-  <a
-    href="#intro"
-    onClick={() => setOpen(false)}
-    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
-  >
-    Intro
-  </a>
 
   <a
     href="#about"
@@ -69,6 +67,20 @@ function Header() {
     About
   </a>
 
+  <a
+    href="#tech"
+    onClick={() => setOpen(false)}
+    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+  >
+    Tech I Used
+  </a>
+  <a
+    href="#services"
+    onClick={() => setOpen(false)}
+    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+  >
+    Services
+  </a>
   <a
     href="#projects"
     onClick={() => setOpen(false)}

@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8 mt-10 border-t border-gray-700">
+    <footer className="bg-gray-900 text-gray-300 pt-16 pb-8 border-t border-gray-700">
 
       {/* TOP GRID */}
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12">

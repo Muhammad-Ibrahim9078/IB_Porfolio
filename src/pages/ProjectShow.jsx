@@ -48,6 +48,7 @@ export default function ProjectsShow() {
 
   return (
     <div className="p-8 max-w-6xl mx-auto text-white"
+    id="projects"
     
     data-aos="zoom-in"
               data-aos-delay
