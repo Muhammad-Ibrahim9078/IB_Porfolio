@@ -6,22 +6,25 @@ function Intro() {
   const nameRef = useRef(null);
 
   useEffect(() => {
-    // Name typing
+    // Name typing (ONE TIME ONLY)
     const typedName = new Typed(nameRef.current, {
       strings: ['<span class="name">M.Ibrahim</span>'],
-      typeSpeed: 70,
-      backSpeed: 40,
-      loop: true,
+      typeSpeed: 100,
+      backSpeed: 10,
+      loop: false,
+      showCursor: false,
     });
 
-    // Merged text typing (1 + 2 combined)
+    // Smooth typing for skill text
     const typedMerged = new Typed(mergedRef.current, {
       strings: [
         `Full Stack Developer`,
-        `<span class="name">Expertise in</span> Front End `,
+        `Expertise in Front End `,
+        `React / Next.js Developer`,
+        `MongoDB, Node.js, Express`,
       ],
-      typeSpeed: 70,
-      backSpeed: 40,
+      typeSpeed: 50,
+      backSpeed: 30,
       loop: true,
       smartBackspace: true,
     });
@@ -44,23 +47,24 @@ function Intro() {
             </h1>
 
             <h2 className="text-4xl font-bold mt-2">
-              I'M <span className="text-black rounded-xl p-1" id="myName" ref={nameRef}></span>
+              I'M <span className="text-black rounded-xl p-1" ref={nameRef}></span>
             </h2>
 
-            {/* Combined Typed */}
+            {/* FIXED HEIGHT TO STOP PAGE JUMPING */}
             <span
               ref={mergedRef}
               className="text-xl font-semibold mt-4 inline-block"
+              style={{ minHeight: "30px", display: "inline-block" }}
             ></span>
-
           </div>
-
-          
 
           {/* Right Image */}
           <div className="home-image mt-[130px] md:mt-0" data-aos="fade-down-left">
-            {/* <img src={devImg} alt="Developer" className="w-72" /> */}
-            <img src="https://res.cloudinary.com/df92wfbox/image/upload/v1765256008/myImages/skeyt9gkg1x54mrtk351.png" alt="My_image" className="rounded-full shadow-lg border-5 border-blue-500" />
+            <img 
+              src="https://res.cloudinary.com/df92wfbox/image/upload/v1765256008/myImages/skeyt9gkg1x54mrtk351.png" 
+              alt="My_image" 
+              className="rounded-full shadow-lg border-5 border-blue-500" 
+            />
           </div>
         </div>
 

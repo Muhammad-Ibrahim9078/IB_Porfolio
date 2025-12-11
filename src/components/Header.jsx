@@ -37,6 +37,10 @@ function Header() {
               Contact
               <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
             </a>
+            <a href="#social_media" className="relative group">
+              Social Media
+              <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+            </a>
 
              <div className="w-[180px] text-center"><Resume /></div>
 
@@ -95,6 +99,14 @@ function Header() {
     className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
   >
     Contact
+  </a>
+
+  <a
+    href="#social_media"
+    onClick={() => setOpen(false)}
+    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+  >
+    Social Media
   </a>
 
   <div className="w-[180px] text-center"><Resume /></div>
