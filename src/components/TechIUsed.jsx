@@ -15,7 +15,7 @@ import {
   FaBootstrap,
 } from "react-icons/fa";
 
-import { SiTailwindcss, SiMongodb, SiExpress, SiFirebase } from "react-icons/si";
+import { SiTailwindcss, SiMongodb, SiExpress, SiFirebase, SiCloudinary, SiNextdotjs   } from "react-icons/si";
 
 const techStack = [
   { icon: <FaHtml5 className="text-orange-500" />, name: "HTML" },
@@ -25,9 +25,11 @@ const techStack = [
   { icon: <MdAnimation className="text-blue-500" />, name: "AOS Animation" },
   { icon: <FaJs className="text-yellow-400" />, name: "JavaScript" },
   { icon: <FaReact className="text-blue-400" />, name: "React" },
+  { icon: <SiNextdotjs className="text-black"/>, name: "Next.js (Basic)" },
   { icon: <FaNodeJs className="text-green-500" />, name: "Node.js" },
   { icon: <SiExpress className="text-gray-300" />, name: "Express.js" },
   { icon: <SiMongodb className="text-green-400" />, name: "MongoDB" },
+  { icon: <SiCloudinary className="text-blue-600" />, name: "Cloudinary" },
   { icon: <SiFirebase className="text-yellow-500" />, name: "Firebase" },
   { icon: <FaDatabase className="text-blue-300" />, name: "Database" },
   { icon: <FaGithub className="text-white" />, name: "GitHub" },
