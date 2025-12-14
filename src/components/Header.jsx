@@ -96,7 +96,7 @@ function Header() {
 
         {/* Mobile Dropdown Menu FULL WIDTH */}
         <nav
-          className={`md:hidden fixed top-0 right-0 mt-[60px] h-full rounded-xl bg-gray-700 text-white flex flex-col items-center gap-8 pt-24 pb-10 shadow-xl transition-all duration-300 ${open ? "w-60 opacity-100" : "w-0 opacity-0"
+          className={`md:hidden fixed top-0 right-0 mt-[60px] h-full rounded-xl bg-gray-700 text-white flex flex-col items-center gap-8 pt-10 pb-10 shadow-xl transition-all duration-300 ${open ? "w-60 opacity-100" : "w-0 opacity-0"
             }`}
           style={{ overflowX: "hidden" }}
         >
