@@ -33,16 +33,55 @@ function Header() {
               <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
             </a>
 
-            <a href="#contact" className="relative group">
-              Contact
-              <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a href="#social_media" className="relative group">
-              Social Media
-              <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            <div className="relative group">
+              {/* DROPDOWN BUTTON */}
+              <button className="relative font-semibold text-white">
+                Connect
+                <span className="absolute left-0 -bottom-1 w-0 h-[3px] bg-blue-500 transition-all duration-300 group-hover:w-full"></span>
+              </button>
 
-             <div className="w-[180px] text-center"><Resume /></div>
+              {/* DROPDOWN MENU */}
+              <div
+                className="
+        absolute top-full mt-3 
+        w-48 
+        bg-gray-900 
+        rounded-xl 
+        shadow-xl 
+        border border-gray-700
+        opacity-0 
+        invisible 
+        group-hover:opacity-100 
+        group-hover:visible
+        transition-all 
+        duration-300
+      "
+              >
+                <a
+                  href="#contact"
+                  className="block px-5 py-3 hover:bg-blue-600 rounded-t-xl transition"
+                >
+                  Contact
+                </a>
+
+                <a
+                  href="#social_media"
+                  className="block px-5 py-3 hover:bg-blue-600 transition"
+                >
+                  Social Media
+                </a>
+
+                <a
+                  href="#feedback"
+                  className="block px-5 py-3 hover:bg-blue-600 rounded-b-xl transition"
+                >
+                  Feedback
+                </a>
+              </div>
+            </div>
+
+
+            <div className="w-[180px] text-center"><Resume /></div>
 
           </nav>
 
@@ -56,61 +95,67 @@ function Header() {
         </div>
 
         {/* Mobile Dropdown Menu FULL WIDTH */}
-          <nav
-  className={`md:hidden fixed top-0 right-0 mt-[60px] h-full rounded-xl bg-gray-700 text-white flex flex-col items-center gap-11 pt-24 pb-10 shadow-xl transition-all duration-300 ${
-    open ? "w-60 opacity-100" : "w-0 opacity-0"
-  }`}
-  style={{ overflowX: "hidden" }}
->
+        <nav
+          className={`md:hidden fixed top-0 right-0 mt-[60px] h-full rounded-xl bg-gray-700 text-white flex flex-col items-center gap-8 pt-24 pb-10 shadow-xl transition-all duration-300 ${open ? "w-60 opacity-100" : "w-0 opacity-0"
+            }`}
+          style={{ overflowX: "hidden" }}
+        >
 
-  <a
-    href="#about"
-    onClick={() => setOpen(false)}
-    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
-  >
-    About
-  </a>
+          <a
+            href="#about"
+            onClick={() => setOpen(false)}
+            className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+          >
+            About
+          </a>
 
-  <a
-    href="#tech"
-    onClick={() => setOpen(false)}
-    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
-  >
-    Tech I Used
-  </a>
-  <a
-    href="#services"
-    onClick={() => setOpen(false)}
-    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
-  >
-    Services
-  </a>
-  <a
-    href="#projects"
-    onClick={() => setOpen(false)}
-    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
-  >
-    Projects
-  </a>
+          <a
+            href="#tech"
+            onClick={() => setOpen(false)}
+            className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+          >
+            Tech I Used
+          </a>
+          <a
+            href="#services"
+            onClick={() => setOpen(false)}
+            className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+          >
+            Services
+          </a>
+          <a
+            href="#projects"
+            onClick={() => setOpen(false)}
+            className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+          >
+            Projects
+          </a>
 
-  <a
-    href="#contact"
-    onClick={() => setOpen(false)}
-    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
-  >
-    Contact
-  </a>
+          <a
+            href="#contact"
+            onClick={() => setOpen(false)}
+            className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+          >
+            Contact
+          </a>
 
-  <a
-    href="#social_media"
-    onClick={() => setOpen(false)}
-    className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
-  >
-    Social Media
-  </a>
+          <a
+            href="#social_media"
+            onClick={() => setOpen(false)}
+            className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+          >
+            Social Media
+          </a>
+          <a
+            href="#social_media"
+            onClick={() => setOpen(false)}
+            className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
+          >
+            Feedback
+          </a>
 
-  <div className="w-[180px] text-center"><Resume /></div>
-</nav>
+          <div className="w-[180px] text-center"><Resume /></div>
+        </nav>
 
       </header>
 

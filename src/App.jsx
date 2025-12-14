@@ -10,6 +10,8 @@ import Footer from './components/Footer'
 import CrudProjects from './pages/CrudProjects'
 import ProjectsShow from './pages/ProjectShow'
 import Contact from './components/Contact'
+import WhatsappContact from './components/WhatsappContact'
+import Feedback from './pages/Feedback'
 
 function App() {
   return (
@@ -44,8 +46,18 @@ function App() {
 
       <Contact />
 
+
+      <WhatsappContact />
+
+
+      <Feedback />
+
+
       <Footer />
     
+
+
+
 
     </div>
     </>

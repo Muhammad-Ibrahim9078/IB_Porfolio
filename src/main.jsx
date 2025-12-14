@@ -5,6 +5,10 @@ import 'aos/dist/aos.css';
 import AOS from 'aos';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Admin from './pages/Admin.jsx';
+import Feedback from './pages/Feedback.jsx';
+import AdminFeedback from './pages/AdminFeedback.jsx';
+import CrudProjects from './pages/CrudProjects.jsx';
+import ContactMessages from './components/ContactMessages.jsx';
 AOS.init();
 
 const router = createBrowserRouter([
@@ -17,8 +21,16 @@ const router = createBrowserRouter([
         element: <Admin />
     },
     {
-        path: '/',
-        element: <App />
+        path: '/crud/projects',
+        element: <CrudProjects />
+    },
+    {
+        path: '/crud/contacts',
+        element: <ContactMessages />
+    },
+    {
+        path: '/crud/feedback',
+        element: <AdminFeedback />
     },
     
 ])

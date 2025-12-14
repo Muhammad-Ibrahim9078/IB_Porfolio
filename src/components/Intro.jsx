@@ -38,7 +38,7 @@ function Intro() {
   return (
     <>
       <section id="intro">
-        <div className="home-container flex flex-col md:flex-row items-center justify-between p-10">
+        <div className="home-container mt-[50px] mb-[70px] flex flex-col md:flex-row items-center justify-between p-10">
 
           {/* Left Text */}
           <div className="home-text" data-aos="fade-down-right">

@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import CrudProjects from "./CrudProjects";
 import ContactMessages from "../components/ContactMessages";
-import { Link, useNavigate } from "react-router-dom";
+import AdminFeedback from "./AdminFeedback";
+import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 function Admin() {
   const [authenticated, setAuthenticated] = useState(false);
-  const [activeTab, setActiveTab] = useState("projects");
+  const [activeSection, setActiveSection] = useState("projects");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -24,8 +25,6 @@ function Admin() {
       showDenyButton: true,
       denyButtonText: "Back",
       allowOutsideClick: false,
-
-      // 🔥 FIX : SweetAlert se values return karwana
       preConfirm: () => {
         const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
@@ -33,96 +32,95 @@ function Admin() {
         if (!username || !password) {
           Swal.showValidationMessage("Please enter Username & Password");
         }
-
         return { username, password };
-      }
+      },
     }).then((result) => {
       if (result.isConfirmed) {
         if (
           result.value.username === "ibrahim9078" &&
           result.value.password === "ibrahim9078@"
         ) {
-          Swal.fire({
-            icon: "success",
-            title: "Login Successful",
-            showConfirmButton: false,
-            timer: 1200,
-          });
           setAuthenticated(true);
         } else {
-          Swal.fire({
-            icon: "error",
-            title: "Invalid Credentials",
-            text: "Username or Password is wrong!",
-            confirmButtonText: "Try Again",
-            showDenyButton: true,
-            denyButtonText: "Back",
-          }).then((res) => {
-            if (res.isDenied) {
-              navigate("/");
-            } else {
-              window.location.reload();
-            }
-          });
+          Swal.fire("Error", "Invalid Credentials", "error").then(() =>
+            navigate("/")
+          );
         }
-      } else if (result.isDenied) {
+      } else {
         navigate("/");
       }
     });
   }, [navigate]);
 
+  if (!authenticated) return null;
+
   return (
-    <div className="min-h-screen w-full bg-[#0c1124] flex justify-center px-4 py-6">
-      {authenticated ? (
-        <div
-          className="w-full max-w-6xl bg-white/5 backdrop-blur-md shadow-xl 
-                     border border-white/10 rounded-2xl p-6 md:p-10 text-white"
-          data-aos="fade-up"
-        >
-          {/* HEADER */}
-          <div className="flex items-center justify-between mb-8">
-            <h1 className="text-3xl md:text-4xl font-bold">Admin Dashboard</h1>
+    <div className="min-h-screen bg-[#0c1124] text-white flex justify-center px-4 py-6">
+      <div
+        className="w-full max-w-6xl bg-white/5 backdrop-blur-md border border-white/10 
+                   rounded-2xl p-6 md:p-10 shadow-xl"
+        data-aos="fade-up"
+      >
+        {/* HEADER */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+          <h1 className="text-3xl md:text-4xl font-bold">
+            Admin Dashboard
+          </h1>
 
-            <Link
-              to="/"
-              className="px-4 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg"
-            >
-              Back
-            </Link>
-          </div>
+          <button
+            onClick={() => navigate("/")}
+            className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg"
+          >
+            Logout
+          </button>
+        </div>
 
-          {/* TABS */}
-          <div className="flex gap-4 mb-8 justify-center">
-            <button
-              onClick={() => setActiveTab("projects")}
-              className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all ${
-                activeTab === "projects"
+        {/* SWITCH BUTTONS */}
+        <div className="flex flex-wrap gap-4 justify-center mb-10">
+          <button
+            onClick={() => setActiveSection("projects")}
+            className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all
+              ${
+                activeSection === "projects"
                   ? "bg-blue-600 shadow-lg"
                   : "bg-gray-700 hover:bg-gray-600"
               }`}
-            >
-              Add Projects
-            </button>
+          >
+            Projects
+          </button>
 
-            <button
-              onClick={() => setActiveTab("contacts")}
-              className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all ${
-                activeTab === "contacts"
+          <button
+            onClick={() => setActiveSection("contacts")}
+            className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all
+              ${
+                activeSection === "contacts"
                   ? "bg-green-600 shadow-lg"
                   : "bg-gray-700 hover:bg-gray-600"
               }`}
-            >
-              View Contact Messages
-            </button>
-          </div>
+          >
+            Contacts
+          </button>
 
-          {/* CONTENT */}
-          <div data-aos="fade-in">
-            {activeTab === "projects" && <CrudProjects />}
-            {activeTab === "contacts" && <ContactMessages />}
-          </div>
+          <button
+            onClick={() => setActiveSection("feedback")}
+            className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all
+              ${
+                activeSection === "feedback"
+                  ? "bg-purple-600 shadow-lg"
+                  : "bg-gray-700 hover:bg-gray-600"
+              }`}
+          >
+            Feedback
+          </button>
         </div>
-      ) : null}
+
+        {/* CONTENT */}
+        <div data-aos="fade-in">
+          {activeSection === "projects" && <CrudProjects />}
+          {activeSection === "contacts" && <ContactMessages />}
+          {activeSection === "feedback" && <AdminFeedback />}
+        </div>
+      </div>
     </div>
   );
 }
