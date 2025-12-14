@@ -1,12 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { db } from "../config/firebase.js";
-import {
-  collection,
-  getDocs,
-  updateDoc,
-  deleteDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import Swal from "sweetalert2";
 
 export default function ContactMessages() {
@@ -28,12 +22,7 @@ export default function ContactMessages() {
 
   const markAsRead = async (id) => {
     await updateDoc(doc(db, "contact", id), { read: true });
-
-    setMessages((prev) =>
-      prev.map((msg) =>
-        msg.id === id ? { ...msg, read: true } : msg
-      )
-    );
+    setMessages((prev) => prev.map((msg) => (msg.id === id ? { ...msg, read: true } : msg)));
   };
 
   const deleteMessage = async (id) => {
@@ -50,7 +39,6 @@ export default function ContactMessages() {
 
     if (confirm.isConfirmed) {
       await deleteDoc(doc(db, "contact", id));
-
       setMessages((prev) => prev.filter((msg) => msg.id !== id));
 
       Swal.fire({
@@ -63,26 +51,21 @@ export default function ContactMessages() {
     }
   };
 
-  const filteredMessages =
-    filter === "unread"
-      ? messages.filter((m) => !m.read)
-      : messages;
-
+  const filteredMessages = filter === "unread" ? messages.filter((m) => !m.read) : messages;
   const unreadCount = messages.filter((m) => !m.read).length;
 
   return (
-    <div className="text-white">
-      <div className="flex items-center justify-between mb-6">
+    <div className="text-white p-4 sm:p-6 md:p-8">
+      {/* HEADER */}
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
         <h2 className="text-3xl font-bold">Contact Messages</h2>
 
         {/* FILTER BUTTONS */}
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 w-full sm:w-auto">
           <button
             onClick={() => setFilter("all")}
-            className={`px-4 py-2 rounded-lg ${
-              filter === "all"
-                ? "bg-blue-600"
-                : "bg-gray-700 hover:bg-gray-600"
+            className={`w-full sm:w-auto px-4 py-2 rounded-lg ${
+              filter === "all" ? "bg-blue-600" : "bg-gray-700 hover:bg-gray-600"
             }`}
           >
             All
@@ -90,70 +73,51 @@ export default function ContactMessages() {
 
           <button
             onClick={() => setFilter("unread")}
-            className={`px-4 py-2 rounded-lg flex items-center gap-2 ${
-              filter === "unread"
-                ? "bg-green-600"
-                : "bg-gray-700 hover:bg-gray-600"
+            className={`w-full sm:w-auto px-4 py-2 rounded-lg flex items-center justify-center gap-2 ${
+              filter === "unread" ? "bg-green-600" : "bg-gray-700 hover:bg-gray-600"
             }`}
           >
             Unread
-            <span className="bg-red-500 text-white px-2 rounded-md text-sm">
-              {unreadCount}
-            </span>
+            <span className="bg-red-500 text-white px-2 rounded-md text-sm">{unreadCount}</span>
           </button>
         </div>
       </div>
 
       {/* MESSAGES */}
-      <div className="grid gap-6">
+      <div className="grid gap-4">
         {filteredMessages.map((msg) => (
           <div
             key={msg.id}
-            className={`p-5 rounded-xl shadow-lg border transition-all
-              ${
-                msg.read
-                  ? "bg-green-900/30 border-green-500"
-                  : "bg-gray-800 border-gray-600"
-              }
-            `}
+            className={`p-4 sm:p-5 rounded-xl shadow-lg border transition-all flex flex-col sm:flex-col gap-3
+              ${msg.read ? "bg-green-900/30 border-green-500" : "bg-gray-800 border-gray-600"}`}
           >
-            <div className="flex justify-between items-center mb-2">
-              <h3 className="text-xl font-semibold">{msg.fullName}</h3>
+            <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-3">
+              <div>
+                <h3 className="text-xl font-semibold">{msg.fullName}</h3>
+                <p className="text-gray-300 text-sm sm:text-base">{msg.message}</p>
+                <p className="text-gray-300 text-sm sm:text-base"><strong>Email:</strong> {msg.email}</p>
+                <p className="text-gray-300 text-sm sm:text-base"><strong>Contact:</strong> {msg.phone}</p>
+                <p className="text-gray-300 text-sm sm:text-base"><strong>Service:</strong> {msg.service}</p>
+              </div>
 
-              <div className="flex gap-3">
-                {/* MARK READ BUTTON */}
+              {/* BUTTONS */}
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 mt-2 sm:mt-0 w-full sm:w-auto">
                 {!msg.read && (
                   <button
                     onClick={() => markAsRead(msg.id)}
-                    className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg"
+                    className="w-full sm:w-auto px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition"
                   >
                     Mark as Read ✓
                   </button>
                 )}
-
-                {/* DELETE BUTTON */}
                 <button
                   onClick={() => deleteMessage(msg.id)}
-                  className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg"
+                  className="w-full sm:w-auto px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg transition"
                 >
                   Delete 🗑
                 </button>
               </div>
             </div>
-
-            <p className="text-gray-300">
-              <strong>Email:</strong> {msg.email}
-            </p>
-
-            <p className="text-gray-300">
-              <strong>Contact:</strong> {msg.phone}
-            </p>
-
-            <p className="text-gray-300">
-              <strong>Service:</strong> {msg.service}
-            </p>
-
-            <p className="mt-3 text-gray-100">{msg.message}</p>
           </div>
         ))}
       </div>

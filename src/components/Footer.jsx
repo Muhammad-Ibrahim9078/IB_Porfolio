@@ -10,7 +10,7 @@ function Footer() {
       <div className="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-12">
 
         {/* BRAND */}
-        <div>
+        <div id="social_media">
           <h2 className="text-2xl font-bold text-white mb-4">M. Ibrahim</h2>
           <p className="text-gray-400 leading-relaxed">
             Full Stack Developer delivering high-quality web and mobile
@@ -18,7 +18,7 @@ function Footer() {
           </p>
 
           {/* SOCIAL ICONS */}
-          <div className="flex gap-4 mt-6" id="social_media">
+          <div className="flex gap-4 mt-6" >
             <a
               href="https://www.youtube.com/@programmingwithIbrahim"
               target="_blank"

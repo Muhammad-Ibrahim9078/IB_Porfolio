@@ -6,10 +6,12 @@ import AdminFeedback from "./AdminFeedback";
 import { useNavigate } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { HiMenu, HiX } from "react-icons/hi";
 
 function Admin() {
   const [authenticated, setAuthenticated] = useState(false);
   const [activeSection, setActiveSection] = useState("projects");
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -76,14 +78,14 @@ function Admin() {
         </div>
 
         {/* SWITCH BUTTONS */}
-        <div className="flex flex-wrap gap-4 justify-center mb-10">
+        {/* Desktop buttons */}
+        <div className="hidden md:flex flex-wrap gap-4 justify-center mb-10">
           <button
             onClick={() => setActiveSection("projects")}
             className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all
-              ${
-                activeSection === "projects"
-                  ? "bg-blue-600 shadow-lg"
-                  : "bg-gray-700 hover:bg-gray-600"
+              ${activeSection === "projects"
+                ? "bg-blue-600 shadow-lg"
+                : "bg-gray-700 hover:bg-gray-600"
               }`}
           >
             Projects
@@ -92,10 +94,9 @@ function Admin() {
           <button
             onClick={() => setActiveSection("contacts")}
             className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all
-              ${
-                activeSection === "contacts"
-                  ? "bg-green-600 shadow-lg"
-                  : "bg-gray-700 hover:bg-gray-600"
+              ${activeSection === "contacts"
+                ? "bg-green-600 shadow-lg"
+                : "bg-gray-700 hover:bg-gray-600"
               }`}
           >
             Contacts
@@ -104,14 +105,62 @@ function Admin() {
           <button
             onClick={() => setActiveSection("feedback")}
             className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all
-              ${
-                activeSection === "feedback"
-                  ? "bg-purple-600 shadow-lg"
-                  : "bg-gray-700 hover:bg-gray-600"
+              ${activeSection === "feedback"
+                ? "bg-purple-600 shadow-lg"
+                : "bg-gray-700 hover:bg-gray-600"
               }`}
           >
             Feedback
           </button>
+        </div>
+
+        {/* Mobile burger menu */}
+        <div className="md:hidden mb-10">
+          <button
+            className="text-3xl"
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? <HiX /> : <HiMenu />}
+          </button>
+
+          <div
+            className={`mt-4 flex flex-col gap-4 transition-all duration-300 overflow-hidden ${
+              menuOpen ? "max-h-96" : "max-h-0"
+            }`}
+          >
+            <button
+              onClick={() => { setActiveSection("projects"); setMenuOpen(false); }}
+              className={`px-6 py-2 rounded-lg text-lg font-semibold w-full text-center transition-all
+                ${activeSection === "projects"
+                  ? "bg-blue-600 shadow-lg"
+                  : "bg-gray-700 hover:bg-gray-600"
+                }`}
+            >
+              Projects
+            </button>
+
+            <button
+              onClick={() => { setActiveSection("contacts"); setMenuOpen(false); }}
+              className={`px-6 py-2 rounded-lg text-lg font-semibold w-full text-center transition-all
+                ${activeSection === "contacts"
+                  ? "bg-green-600 shadow-lg"
+                  : "bg-gray-700 hover:bg-gray-600"
+                }`}
+            >
+              Contacts
+            </button>
+
+            <button
+              onClick={() => { setActiveSection("feedback"); setMenuOpen(false); }}
+              className={`px-6 py-2 rounded-lg text-lg font-semibold w-full text-center transition-all
+                ${activeSection === "feedback"
+                  ? "bg-purple-600 shadow-lg"
+                  : "bg-gray-700 hover:bg-gray-600"
+                }`}
+            >
+              Feedback
+            </button>
+          </div>
         </div>
 
         {/* CONTENT */}

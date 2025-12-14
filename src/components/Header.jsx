@@ -147,7 +147,7 @@ function Header() {
             Social Media
           </a>
           <a
-            href="#social_media"
+            href="#feedback"
             onClick={() => setOpen(false)}
             className="bg-white text-black px-4 py-2 rounded hover:bg-green-200 w-40 text-center"
           >

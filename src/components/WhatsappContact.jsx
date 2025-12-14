@@ -4,7 +4,7 @@ function WhatsappContact() {
     return (
         <div class="fixed bottom-[20px] right-[10px] z-50">
             <a
-                href="https://wa.me/923702789462?text=Hello%20Ibrahim%20I%20want%20to%20contact%20you"
+                href="https://wa.me/923702789462?text=Hi%20Ibrahim"
                 target="_blank"
                 rel="noopener noreferrer"
             >

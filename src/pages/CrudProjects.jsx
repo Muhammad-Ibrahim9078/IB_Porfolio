@@ -127,37 +127,35 @@ export default function CrudProjects() {
 
   return (
     <div className="p-4 sm:p-6 md:p-8 w-full max-w-4xl mx-auto text-white">
-
       <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-center sm:text-left">
         Projects CRUD with Cloudinary & Firebase
       </h1>
 
       {/* --- ADD FORM --- */}
       <div className="bg-gray-800 p-4 sm:p-6 rounded-xl grid gap-4">
-
         <input
-          className="p-3 rounded bg-gray-700 text-sm sm:text-base"
+          className="w-full p-3 rounded bg-gray-700 text-sm sm:text-base"
           placeholder="Title"
           value={form.title}
           onChange={(e) => setForm({ ...form, title: e.target.value })}
         />
 
         <textarea
-          className="p-3 rounded bg-gray-700 h-24 sm:h-28 text-sm sm:text-base"
+          className="w-full p-3 rounded bg-gray-700 h-24 sm:h-28 text-sm sm:text-base"
           placeholder="Description"
           value={form.description}
           onChange={(e) => setForm({ ...form, description: e.target.value })}
         />
 
         <input
-          className="p-3 rounded bg-gray-700 text-sm sm:text-base"
+          className="w-full p-3 rounded bg-gray-700 text-sm sm:text-base"
           placeholder="GitHub Link"
           value={form.githubLink}
           onChange={(e) => setForm({ ...form, githubLink: e.target.value })}
         />
 
         <input
-          className="p-3 rounded bg-gray-700 text-sm sm:text-base"
+          className="w-full p-3 rounded bg-gray-700 text-sm sm:text-base"
           placeholder="Live Link"
           value={form.liveLink}
           onChange={(e) => setForm({ ...form, liveLink: e.target.value })}
@@ -165,14 +163,14 @@ export default function CrudProjects() {
 
         <input
           type="file"
-          className="p-2 rounded bg-gray-700 text-sm sm:text-base"
+          className="w-full p-2 rounded bg-gray-700 text-sm sm:text-base"
           onChange={(e) => setForm({ ...form, image: e.target.files[0] })}
         />
 
         <button
           onClick={addProject}
           disabled={loading}
-          className={`p-3 rounded text-sm sm:text-base font-semibold transition-all 
+          className={`w-full p-3 rounded text-sm sm:text-base font-semibold transition-all 
             ${loading
               ? "bg-gray-600 cursor-not-allowed"
               : "bg-green-600 hover:bg-green-700 hover:scale-[1.02]"
@@ -184,7 +182,6 @@ export default function CrudProjects() {
 
       {/* --- PROJECT CARDS --- */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-10">
-
         {data.map((p) => (
           <div
             key={p.id}
@@ -202,25 +199,22 @@ export default function CrudProjects() {
             <p className="text-gray-300 text-sm sm:text-base">{p.description}</p>
 
             <div className="mt-4 flex flex-col sm:flex-row gap-2 sm:gap-4">
-
               <button
                 onClick={() => editProject(p)}
-                className="bg-yellow-600 px-4 py-2 rounded hover:bg-yellow-700 transition"
+                className="bg-yellow-600 px-4 py-2 rounded hover:bg-yellow-700 transition w-full sm:w-auto"
               >
                 Edit
               </button>
 
               <button
                 onClick={() => deleteProject(p.id)}
-                className="bg-red-600 px-4 py-2 rounded hover:bg-red-700 transition"
+                className="bg-red-600 px-4 py-2 rounded hover:bg-red-700 transition w-full sm:w-auto"
               >
                 Delete
               </button>
-
             </div>
           </div>
         ))}
-
       </div>
     </div>
   );
