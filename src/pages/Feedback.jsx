@@ -4,14 +4,16 @@ import {
   collection,
   addDoc,
   getDocs,
+  updateDoc,
+  doc,
   serverTimestamp,
   orderBy,
   query,
 } from "firebase/firestore";
 import { db } from "../config/firebase";
-import { FaPenFancy } from "react-icons/fa";
+import { FaPenFancy, FaThumbsUp } from "react-icons/fa";
 
-export default function Feedback() {
+export default function Feedback({ isAdmin = false }) {
   const [openForm, setOpenForm] = useState(false);
   const [loading, setLoading] = useState(false);
   const [feedbacks, setFeedbacks] = useState([]);
@@ -19,10 +21,7 @@ export default function Feedback() {
 
   // ---------- FETCH FEEDBACK ----------
   async function loadFeedback() {
-    const q = query(
-      collection(db, "feedback"),
-      orderBy("created_at", "desc")
-    );
+    const q = query(collection(db, "feedback"), orderBy("created_at", "desc"));
     const snapshot = await getDocs(q);
     setFeedbacks(snapshot.docs.map(d => ({ id: d.id, ...d.data() })));
   }
@@ -44,7 +43,7 @@ export default function Feedback() {
         name: form.name,
         message: form.message,
         created_at: serverTimestamp(),
-        read: false,
+        likes: [], // initialize empty array
       });
 
       Swal.fire("Thanks!", "Feedback submitted successfully", "success");
@@ -56,6 +55,27 @@ export default function Feedback() {
     } finally {
       setLoading(false);
     }
+  }
+
+  // ---------- HANDLE LIKE ----------
+  async function toggleLike(feedbackId, likes) {
+    const docRef = doc(db, "feedback", feedbackId);
+    let updatedLikes = [...likes];
+
+    if (isAdmin) {
+      // Admin always has a separate 'admin' like
+      if (!updatedLikes.includes("admin")) updatedLikes.push("admin");
+    } else {
+      const userId = "user123"; // replace with real user ID if login system exists
+      if (updatedLikes.includes(userId)) {
+        updatedLikes = updatedLikes.filter(id => id !== userId);
+      } else {
+        updatedLikes.push(userId);
+      }
+    }
+
+    await updateDoc(docRef, { likes: updatedLikes });
+    loadFeedback();
   }
 
   return (
@@ -87,18 +107,14 @@ export default function Feedback() {
                 placeholder="Your Name"
                 className="w-full mb-3 p-2 rounded bg-gray-900 border border-gray-600 focus:outline-none"
                 value={form.name}
-                onChange={e =>
-                  setForm({ ...form, name: e.target.value })
-                }
+                onChange={e => setForm({ ...form, name: e.target.value })}
               />
 
               <textarea
                 placeholder="Your Message"
                 className="w-full mb-4 p-2 rounded bg-gray-900 border border-gray-600 h-28 resize-none focus:outline-none"
                 value={form.message}
-                onChange={e =>
-                  setForm({ ...form, message: e.target.value })
-                }
+                onChange={e => setForm({ ...form, message: e.target.value })}
               />
 
               <button
@@ -119,18 +135,46 @@ export default function Feedback() {
             <p className="text-gray-400">No feedback yet.</p>
           )}
 
-          {feedbacks.map(f => (
-            <div
-              key={f.id}
-              className="bg-gray-800 p-5 rounded-xl border border-gray-700"
-            >
-              <h4 className="font-semibold text-lg">{f.name}</h4>
-              <p className="text-gray-300 mt-2">{f.message}</p>
-            </div>
-          ))}
+          {feedbacks.map(f => {
+            const likeCount = f.likes?.length || 0;
+            const adminLiked = f.likes?.includes("admin");
+
+            return (
+              <div
+                key={f.id}
+                className="bg-gray-800 p-5 rounded-xl border border-gray-700 flex flex-col md:flex-row md:justify-between md:items-center gap-3"
+              >
+                <div>
+                  <h4 className="font-semibold text-lg">{f.name}</h4>
+                  <p className="text-gray-300 mt-2">{f.message}</p>
+                </div>
+
+                <div className="flex items-center gap-3 mt-2 md:mt-0">
+                  <button
+                    onClick={() => toggleLike(f.id, f.likes || [])}
+                    className={`flex items-center gap-1 px-3 py-1 rounded-full ${
+                      adminLiked && isAdmin
+                        ? "bg-yellow-500 text-black"
+                        : "bg-blue-600 text-white hover:bg-blue-700"
+                    } transition`}
+                  >
+                    <FaThumbsUp />
+                    {likeCount} {likeCount === 1 ? "Like" : "Likes"}
+                  </button>
+
+                  {adminLiked && isAdmin && (
+                    <span className="text-yellow-400 text-sm font-semibold">
+                      You liked
+                    </span>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
       </div>
     </div>
   );
 }
+  
