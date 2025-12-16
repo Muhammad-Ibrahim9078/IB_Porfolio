@@ -17,34 +17,45 @@ function Admin() {
   useEffect(() => {
     AOS.init({ duration: 800 });
 
+    // 🔐 ADMIN LOGIN (PASSWORD ONLY)
     Swal.fire({
       title: "Admin Login",
+      width: "90%", // 🔥 mobile overflow fix
+      padding: "1.5rem",
+      allowOutsideClick: false,
+      customClass: {
+        popup: "rounded-2xl",
+        confirmButton: "swal-confirm",
+        denyButton: "swal-deny",
+      },
       html: `
-        <input type="text" id="username" class="swal2-input" placeholder="Username" />
-        <input type="password" id="password" class="swal2-input" placeholder="Password" />
+        <input 
+          type="password" 
+          id="password" 
+          class="swal2-input"
+          placeholder="Enter Admin Password"
+          style="width:100%; margin:0.5rem auto;"
+        />
       `,
       confirmButtonText: "Login",
       showDenyButton: true,
       denyButtonText: "Back",
-      allowOutsideClick: false,
+
       preConfirm: () => {
-        const username = document.getElementById("username").value;
         const password = document.getElementById("password").value;
 
-        if (!username || !password) {
-          Swal.showValidationMessage("Please enter Username & Password");
+        if (!password) {
+          Swal.showValidationMessage("Password is required");
+          return false;
         }
-        return { username, password };
+        return password;
       },
     }).then((result) => {
       if (result.isConfirmed) {
-        if (
-          result.value.username === "ibrahim9078" &&
-          result.value.password === "ibrahim9078@"
-        ) {
+        if (result.value === "ibrahim9078@") {
           setAuthenticated(true);
         } else {
-          Swal.fire("Error", "Invalid Credentials", "error").then(() =>
+          Swal.fire("Error", "Wrong Password", "error").then(() =>
             navigate("/")
           );
         }
@@ -77,44 +88,25 @@ function Admin() {
           </button>
         </div>
 
-        {/* SWITCH BUTTONS */}
-        {/* Desktop buttons */}
+        {/* DESKTOP NAV */}
         <div className="hidden md:flex flex-wrap gap-4 justify-center mb-10">
-          <button
-            onClick={() => setActiveSection("projects")}
-            className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all
-              ${activeSection === "projects"
-                ? "bg-blue-600 shadow-lg"
-                : "bg-gray-700 hover:bg-gray-600"
-              }`}
-          >
-            Projects
-          </button>
-
-          <button
-            onClick={() => setActiveSection("contacts")}
-            className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all
-              ${activeSection === "contacts"
-                ? "bg-green-600 shadow-lg"
-                : "bg-gray-700 hover:bg-gray-600"
-              }`}
-          >
-            Contacts
-          </button>
-
-          <button
-            onClick={() => setActiveSection("feedback")}
-            className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all
-              ${activeSection === "feedback"
-                ? "bg-purple-600 shadow-lg"
-                : "bg-gray-700 hover:bg-gray-600"
-              }`}
-          >
-            Feedback
-          </button>
+          {["projects", "contacts", "feedback"].map((item) => (
+            <button
+              key={item}
+              onClick={() => setActiveSection(item)}
+              className={`px-6 py-2 rounded-lg text-lg font-semibold transition-all
+                ${
+                  activeSection === item
+                    ? "bg-blue-600 shadow-lg"
+                    : "bg-gray-700 hover:bg-gray-600"
+                }`}
+            >
+              {item.charAt(0).toUpperCase() + item.slice(1)}
+            </button>
+          ))}
         </div>
 
-        {/* Mobile burger menu */}
+        {/* MOBILE MENU */}
         <div className="md:hidden mb-10">
           <button
             className="text-3xl"
@@ -124,42 +116,27 @@ function Admin() {
           </button>
 
           <div
-            className={`mt-4 flex flex-col gap-4 transition-all duration-300 overflow-hidden ${
+            className={`mt-4 flex flex-col gap-4 overflow-hidden transition-all duration-300 ${
               menuOpen ? "max-h-96" : "max-h-0"
             }`}
           >
-            <button
-              onClick={() => { setActiveSection("projects"); setMenuOpen(false); }}
-              className={`px-6 py-2 rounded-lg text-lg font-semibold w-full text-center transition-all
-                ${activeSection === "projects"
-                  ? "bg-blue-600 shadow-lg"
-                  : "bg-gray-700 hover:bg-gray-600"
-                }`}
-            >
-              Projects
-            </button>
-
-            <button
-              onClick={() => { setActiveSection("contacts"); setMenuOpen(false); }}
-              className={`px-6 py-2 rounded-lg text-lg font-semibold w-full text-center transition-all
-                ${activeSection === "contacts"
-                  ? "bg-green-600 shadow-lg"
-                  : "bg-gray-700 hover:bg-gray-600"
-                }`}
-            >
-              Contacts
-            </button>
-
-            <button
-              onClick={() => { setActiveSection("feedback"); setMenuOpen(false); }}
-              className={`px-6 py-2 rounded-lg text-lg font-semibold w-full text-center transition-all
-                ${activeSection === "feedback"
-                  ? "bg-purple-600 shadow-lg"
-                  : "bg-gray-700 hover:bg-gray-600"
-                }`}
-            >
-              Feedback
-            </button>
+            {["projects", "contacts", "feedback"].map((item) => (
+              <button
+                key={item}
+                onClick={() => {
+                  setActiveSection(item);
+                  setMenuOpen(false);
+                }}
+                className={`px-6 py-2 rounded-lg text-lg font-semibold w-full transition-all
+                  ${
+                    activeSection === item
+                      ? "bg-blue-600 shadow-lg"
+                      : "bg-gray-700 hover:bg-gray-600"
+                  }`}
+              >
+                {item.charAt(0).toUpperCase() + item.slice(1)}
+              </button>
+            ))}
           </div>
         </div>
 

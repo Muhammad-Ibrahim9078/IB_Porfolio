@@ -18,41 +18,89 @@ export default function ProjectsShow() {
     fetchProjects();
   }, []);
 
-  // ---------- OPEN CARD DETAILS IN POPUP ----------
+  // ---------- OPEN CARD DETAILS IN SWEETALERT ----------
   function openDetails(p) {
-    
+    const shortDesc = p.description.slice(0, 150);
+
     Swal.fire({
       title: p.title,
+      width: "90%",
+      showCloseButton: true,
+      showConfirmButton: false,
       html: `
-        <img src="${p.image}" style="width:100%; border-radius:10px; margin-bottom:10px;" />
+        <img 
+          src="${p.image}" 
+          style="width:100%; border-radius:10px; margin-bottom:10px;" 
+        />
 
-        <p style="text-align:left; font-size:16px;">
+        <p 
+          id="desc"
+          style="
+            text-align:left;
+            font-size:15px;
+            display:-webkit-box;
+            -webkit-line-clamp:2;
+            -webkit-box-orient:vertical;
+            overflow:hidden;
+          "
+        >
           ${p.description}
         </p>
 
+        <button 
+          id="readMoreBtn"
+          style="
+            background:none;
+            border:none;
+            color:#60a5fa;
+            cursor:pointer;
+            margin-top:5px;
+            font-size:14px;
+          "
+        >
+          Read more
+        </button>
+
         <div style="margin-top:15px; display:flex; gap:10px; justify-content:center;">
-          <a href="${p.githubLink}" target="_blank" style="padding:10px 15px; background:#111827; color:white; border-radius:8px;">
+          <a href="${p.githubLink}" target="_blank"
+             style="padding:10px 15px; background:#111827; color:white; border-radius:8px;">
             GitHub
           </a>
 
-          <a href="${p.liveLink}" target="_blank" style="padding:10px 15px; background:#2563eb; color:white; border-radius:8px;">
+          <a href="${p.liveLink}" target="_blank"
+             style="padding:10px 15px; background:#2563eb; color:white; border-radius:8px;">
             Live Demo
           </a>
         </div>
       `,
-      showCloseButton: true,
-      showConfirmButton: false,
-      width: "600px",
+      didOpen: () => {
+        const desc = document.getElementById("desc");
+        const btn = document.getElementById("readMoreBtn");
+        let expanded = false;
+
+        btn.addEventListener("click", () => {
+          expanded = !expanded;
+
+          if (expanded) {
+            desc.style.webkitLineClamp = "unset";
+            desc.style.overflow = "visible";
+            btn.innerText = "Read less";
+          } else {
+            desc.style.webkitLineClamp = "2";
+            desc.style.overflow = "hidden";
+            btn.innerText = "Read more";
+          }
+        });
+      },
     });
   }
 
   return (
-    <div className="p-8 max-w-6xl mx-auto text-white"
-    id="projects"
-    
-    data-aos="zoom-in"
-              data-aos-delay
-              >
+    <div
+      id="projects"
+      className="p-6 sm:p-8 max-w-6xl mx-auto text-white"
+      data-aos="zoom-in"
+    >
       <h1 className="text-3xl font-bold mb-6">My Projects</h1>
 
       {/* PROJECTS GRID */}
@@ -73,9 +121,8 @@ export default function ProjectsShow() {
 
             <h2 className="text-xl font-bold">{p.title}</h2>
 
-            {/* MORE INFO BADGE */}
             <div className="mt-3">
-              <span className="text-sm bg-blue-600 px-3 py-1 rounded-full inline-block hover:bg-blue-700 transition-all duration-300">
+              <span className="text-sm bg-blue-600 px-3 py-1 rounded-full inline-block hover:bg-blue-700 transition">
                 More Info →
               </span>
             </div>

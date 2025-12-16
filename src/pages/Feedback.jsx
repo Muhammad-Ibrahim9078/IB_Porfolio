@@ -59,46 +59,29 @@ export default function Feedback() {
   }
 
   return (
-    <div id="feedback" className=" bg-gray-900 text-white p-6 md:p-10">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+    <div id="feedback" className="bg-gray-900 text-white p-6 md:p-10">
+      <div className="max-w-4xl mx-auto">
 
-        {/* ================= LEFT : FEEDBACK LIST ================= */}
-        <div className="md:col-span-2">
-          <h2 className="text-3xl font-bold mb-6">What People Say</h2>
+        <h2 className="text-3xl font-bold mb-6">What People Say</h2>
 
+        {/* ============ GIVE FEEDBACK BUTTON ============ */}
+        <div className="mb-6">
           <button
             onClick={() => setOpenForm(!openForm)}
-            className="sticky top-24 z-20 flex items-center gap-3  bg-blue-600 px-5 py-3 rounded-xl shadow-lg hover:bg-blue-700 transition"
+            className="flex items-center gap-2 bg-blue-600 px-5 py-3 rounded-xl shadow hover:bg-blue-700 transition"
           >
             <FaPenFancy />
             Give Feedback
           </button>
 
-          <div className="space-y-4">
-            {feedbacks.length === 0 && (
-              <p className="text-gray-400">No feedback yet.</p>
-            )}
+          {/* ============ FORM OPENS JUST BELOW BUTTON ============ */}
+          <div
+            className={`overflow-hidden transition-all duration-300 ${
+              openForm ? "max-h-[500px] mt-4" : "max-h-0"
+            }`}
+          >
+            <div className="bg-gray-800 p-5 rounded-xl border border-gray-700">
 
-            {feedbacks.map(f => (
-              <div
-                key={f.id}
-                className="bg-gray-800 p-5 rounded-xl border border-gray-700"
-              >
-                <h4 className="font-semibold text-lg">{f.name}</h4>
-                <p className="text-gray-300 mt-2">{f.message}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* ================= RIGHT : STICKY BUTTON ================= */}
-        <div>
-          {/* ONLY BUTTON IS STICKY */}
-          
-
-          {/* FEEDBACK FORM (NORMAL FLOW) */}
-          {openForm && (
-            <div className="mt-6 bg-gray-800 p-5 rounded-xl border border-gray-700">
               <input
                 type="text"
                 placeholder="Your Name"
@@ -111,7 +94,7 @@ export default function Feedback() {
 
               <textarea
                 placeholder="Your Message"
-                className="w-full mb-3 p-2 rounded bg-gray-900 border border-gray-600 h-28 resize-none focus:outline-none"
+                className="w-full mb-4 p-2 rounded bg-gray-900 border border-gray-600 h-28 resize-none focus:outline-none"
                 value={form.message}
                 onChange={e =>
                   setForm({ ...form, message: e.target.value })
@@ -126,10 +109,27 @@ export default function Feedback() {
                 {loading ? "Sending..." : "Submit Feedback"}
               </button>
 
-              
             </div>
-          )}
+          </div>
         </div>
+
+        {/* ============ FEEDBACK LIST ============ */}
+        <div className="space-y-4">
+          {feedbacks.length === 0 && (
+            <p className="text-gray-400">No feedback yet.</p>
+          )}
+
+          {feedbacks.map(f => (
+            <div
+              key={f.id}
+              className="bg-gray-800 p-5 rounded-xl border border-gray-700"
+            >
+              <h4 className="font-semibold text-lg">{f.name}</h4>
+              <p className="text-gray-300 mt-2">{f.message}</p>
+            </div>
+          ))}
+        </div>
+
       </div>
     </div>
   );
